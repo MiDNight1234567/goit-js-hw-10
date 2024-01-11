@@ -1,3 +1,5 @@
+'use strict';
+
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 
@@ -5,15 +7,37 @@ const form = document.querySelector('.form');
 
 form.addEventListener('submit', event => {
   event.preventDefault();
-  const delay = form.elements.delay.value;
-  const state = form.elements.state.value;
+  const delay = form.delay.value;
+  const state = form.state.value;
+
   makePromise({ value: delay, delay: delay, state: state })
     .then(value =>
-      showMessage('izi-check', '#82C43C', `Fulfilled promise in ${delay}ms`)
+      iziToast.show({
+        class: 'access-svg',
+        position: 'topRight',
+        icon: 'access-svg',
+        message: `Fulfilled promise in ${delay} ms!`,
+        messageColor: '#fff',
+        messageSize: '16px',
+        backgroundColor: '#59A10D',
+        close: false,
+        closeOnClick: true,
+      })
     )
     .catch(error =>
-      showMessage('izi-close-icon', '#FC5A5A', `Rejected promise in ${delay}ms`)
+      iziToast.show({
+        class: 'error-svg',
+        position: 'topRight',
+        icon: 'error-svg',
+        message: `Rejected promise in ${delay} ms!`,
+        messageColor: '#fff',
+        messageSize: '16px',
+        backgroundColor: '#EF4040',
+        close: false,
+        closeOnClick: true,
+      })
     );
+  form.reset();
 });
 
 const makePromise = ({ value, delay, state }) => {
@@ -25,19 +49,5 @@ const makePromise = ({ value, delay, state }) => {
         reject(value);
       }
     }, delay);
-  });
-};
-
-const showMessage = (icon, color, msg) => {
-  iziToast.show({
-    position: 'topCenter',
-    iconColor: '#FAFAFB',
-    icon: icon,
-    messageColor: '#FAFAFB',
-    messageSize: '16px',
-    backgroundColor: color,
-    close: false,
-    closeOnClick: true,
-    message: msg,
   });
 };
