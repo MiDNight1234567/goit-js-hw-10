@@ -48,7 +48,7 @@ const options = {
 
 flatpickr('#datetime-picker', options);
 
-refs.startBtn.addEventListener('click', e => {
+refs.startBtn.addEventListener('click', elem => {
   const timer = setInterval(() => {
     const diff = userSelectedDate - Date.now();
     const timeValue = convertMs(diff);
