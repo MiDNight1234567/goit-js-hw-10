@@ -8,6 +8,7 @@ import 'izitoast/dist/css/iziToast.min.css';
 let userSelectedDate;
 
 const refs = {
+  dateInput: document.querySelector('.datetime-input'),
   startBtn: document.querySelector('button[data-start]'),
   timerDays: document.querySelector('span[data-days]'),
   timerHours: document.querySelector('span[data-hours]'),
@@ -15,6 +16,7 @@ const refs = {
   timerSeconds: document.querySelector('span[data-seconds]'),
 };
 refs.startBtn.disabled = true;
+refs.dateInput.disabled = false;
 
 const options = {
   enableTime: true,
@@ -54,6 +56,10 @@ refs.startBtn.addEventListener('click', elem => {
     const timeValue = convertMs(diff);
     if (diff <= 0) {
       clearInterval(timer);
+      refs.startBtn.disabled = false;
+      refs.startBtn.classList.remove('disabled');
+      refs.dateInput.disabled = false;
+      refs.dateInput.classList.remove('disabled');
     } else {
       refs.timerDays.textContent = addLeadingZero(timeValue.days);
       refs.timerHours.textContent = addLeadingZero(timeValue.hours);
@@ -61,6 +67,10 @@ refs.startBtn.addEventListener('click', elem => {
       refs.timerSeconds.textContent = addLeadingZero(timeValue.seconds);
     }
   }, 1000);
+  refs.startBtn.disabled = true;
+  refs.startBtn.classList.add('disabled');
+  refs.dateInput.disabled = true;
+  refs.dateInput.classList.add('disabled');
 });
 
 function addLeadingZero(value) {

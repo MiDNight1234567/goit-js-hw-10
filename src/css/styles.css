@@ -57,6 +57,18 @@ body {
   border: 1px solid #4e75ff;
 }
 
+.datetime-input.disabled {
+  color: #ffffff;
+  background-color: #b2b2b2;
+  border: 1px solid transparent;
+}
+
+.datetime-input.disabled:hover,
+.datetime-input.disabled:focus {
+  cursor: not-allowed;
+  border: 1px solid transparent;
+}
+
 .start-btn {
   width: 75px;
   height: 40px;
